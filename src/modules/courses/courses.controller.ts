@@ -29,7 +29,7 @@ export class CoursesController {
     return this.coursesService.findAllByLab(lab);
   }
 
-  @Get('/labs/list')
+  @Get('/current-labs/list')
   findLabs() {
     return this.coursesService.findLabs();
   }
