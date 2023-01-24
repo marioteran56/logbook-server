@@ -24,9 +24,9 @@ export class AuthService {
     }
 
     async loginUser(loginAuthDto: LoginAuthDto) {
-        const { name, password } = loginAuthDto;
+        const { email, password } = loginAuthDto;
         // Buscamos si existe el usuario en la base de datos
-        const user = await this.userModel.findOne({ name });
+        const user = await this.userModel.findOne({ email });
         if (!user) throw new HttpException('User not found', 404);
         // Revisamos si la contraseña es correcta
         const checkPassword = await compare(password, user.password);
@@ -35,7 +35,7 @@ export class AuthService {
         // Generamos el token
         const payload = {
             id: user._id,
-            name: user.name
+            email: user.email
         };
         const token = await this.jwtService.sign(payload);
         // Creamos un objeto nuevo con el token generado
