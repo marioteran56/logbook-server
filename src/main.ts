@@ -13,6 +13,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, { httpsOptions, cors: true });
   app.use(bodyParser.json({ limit: '15mb' }));
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
+  app.setGlobalPrefix('api');
   await app.listen(3000);
 }
 bootstrap();

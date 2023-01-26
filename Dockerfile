@@ -1,35 +1,22 @@
-# Specify Node Version and Image
-# Name Image development (can be anything)
-FROM node:18 AS development
-
-# Specify Working directory inside container
-WORKDIR /src/app
-
-# Copy package-lock.json & package.json from host to inside container working directory
+# Development
+FROM node AS development
+WORKDIR /logbook/src/app
+# install and app dependencies
 COPY package*.json ./
-
-# Install deps inside container
+COPY tsconfig.json ./
 RUN npm install
-
 RUN npm run build
+# expose port
 
-EXPOSE 3000
-
-################
-## PRODUCTION ##
-################
-# Build another image named production
-FROM node:18 AS production
-
+# Production
+FROM node AS production
+# set environment
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
-
-# Set work dir
-WORKDIR /src/app
-
-COPY --from=development /src/app/ .
-
+WORKDIR /logbook/src/app
+# add app
+COPY --from=development /logbook/src/app/ .
+# expose port
 EXPOSE 3000
-
-# run app
-CMD [ "node", "dist/main"]
+# start app
+CMD ["node", "dist/main"]

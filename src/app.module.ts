@@ -8,12 +8,12 @@ import { ProfessorsModule } from './modules/professors/professors.module';
 import { EntriesModule } from './modules/entries/entries.module';
 import { CoursesModule } from './modules/courses/courses.module';
 import { AuthModule } from './modules/auth/auth.module';
-import { ServeStaticModule } from '@nestjs/serve-static';
-import { join } from 'path';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost:27017/logbook'),
+    ConfigModule.forRoot( {isGlobal: true} ),
+    MongooseModule.forRoot('mongodb://Automatica:Ingenieria2023@148.229.22.5:27017', { dbName: 'logbook' }),
     UsersModule,
     StudentsModule,
     ProfessorsModule,
