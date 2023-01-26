@@ -13,10 +13,6 @@ import { join } from 'path';
 
 @Module({
   imports: [
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'public'),
-      
-    }),
     MongooseModule.forRoot('mongodb://localhost:27017/logbook'),
     UsersModule,
     StudentsModule,
