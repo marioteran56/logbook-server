@@ -10,11 +10,9 @@ async function bootstrap() {
     key: readFileSync('./cert/key.pem'),
     cert: readFileSync('./cert/cert.pem'),
   };
-
-  const app = await NestFactory.create(AppModule, { httpsOptions });
+  const app = await NestFactory.create(AppModule, { httpsOptions, cors: true });
   app.use(bodyParser.json({ limit: '15mb' }));
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
-  app.enableCors();
   await app.listen(3000);
 }
 bootstrap();
