@@ -13,7 +13,7 @@ import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
     ConfigModule.forRoot( {isGlobal: true} ),
-    MongooseModule.forRoot('mongodb://Automatica:Ingenieria2023@148.229.22.5:27017', { dbName: 'logbook' }),
+    MongooseModule.forRoot('mongodb://10.20.10.74:27017', { dbName: 'logbook' }),
     UsersModule,
     StudentsModule,
     ProfessorsModule,

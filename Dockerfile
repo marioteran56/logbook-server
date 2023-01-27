@@ -1,5 +1,5 @@
 # Development
-FROM node AS development
+FROM node:18-slim AS development
 WORKDIR /logbook/src/app
 # install and app dependencies
 COPY package*.json ./
@@ -9,7 +9,7 @@ RUN npm run build
 # expose port
 
 # Production
-FROM node AS production
+FROM node:18-slim AS production
 # set environment
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
