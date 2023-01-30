@@ -13,7 +13,7 @@ import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
     ConfigModule.forRoot( {isGlobal: true} ),
-    MongooseModule.forRoot('mongodb://192.168.1.148:27017', { dbName: 'logbook' }),
+    MongooseModule.forRoot(process.env.DATABASE_URL, { dbName: 'logbook' }),
     UsersModule,
     StudentsModule,
     ProfessorsModule,
