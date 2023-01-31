@@ -1,0 +1,53 @@
+version: "3.8"
+
+services:
+  # NestJS
+  nestjs:
+    container_name: logbook_server
+    build:
+      dockerfile: Dockerfile
+      context: ./logbook-server
+      target: development
+    volumes:
+      - ./logbook-server:/logbook/src/app
+      - /logbook/src/app/node_modules/
+    command: npm run start:dev
+    restart: always
+    depends_on: 
+      - mongo
+    environment:
+      DATABASE_URL: mongodb://Automatica:Ingenieria2023@mongo:27017
+      NODE_ENV: development
+      JWT_SECRET: tres_tristes_tigres
+      PORT: 3000
+    ports:
+      - 3000:3000
+      - 9229:9229
+  # Angular
+  angular:
+    container_name: logbook_ng
+    build:
+      dockerfile: Dockerfile
+      context: ./logbook
+      target: development
+    volumes:
+      - ./logbook:/logbook/frontend/src/app
+      - /logbook/frontend/src/app/node_modules/
+    command: npm run start
+    restart: always
+    ports:
+      - 443:443
+    links:
+      - nestjs
+  # MongoDB
+  mongo:
+    container_name: mongo_logbook
+    image: mongo
+    environment:
+        - MONGO_INITDB_ROOT_USERNAME=Automatica
+        - MONGO_INITDB_ROOT_PASSWORD=Ingenieria2023
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongo:/data/db
