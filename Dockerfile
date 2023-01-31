@@ -7,6 +7,7 @@ COPY tsconfig.json ./
 RUN npm install
 RUN npm run build
 # expose port
+EXPOSE 3000
 
 # Production
 FROM node:18-slim AS production
