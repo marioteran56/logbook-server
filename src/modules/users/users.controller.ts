@@ -3,6 +3,7 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { hash } from 'bcrypt';
 
 @UseGuards(JwtAuthGuard)
 @Controller('users')
@@ -25,7 +26,13 @@ export class UsersController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: any) {
+  async update(@Param('id') id: string, @Body() updateUserDto: any) {
+    // Revisamos si la contraseña fue modificada
+    const { password } = updateUserDto;
+    if (password) {
+      const plainToHash = await hash(password, 10);
+      updateUserDto =  {...updateUserDto, password: plainToHash};
+    }
     return this.usersService.update(id, updateUserDto);
   }
 
