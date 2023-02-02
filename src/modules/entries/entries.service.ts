@@ -174,6 +174,7 @@ export class EntriesService {
           _id: {
             date: '$date',
             professor: '$professor',
+            course: '$course',
           },
           date: {
             $first: '$date',
