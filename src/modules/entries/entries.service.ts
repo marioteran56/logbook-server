@@ -158,7 +158,12 @@ export class EntriesService {
       {
         $project: {
           _id: 0,
-          date: 1,
+          date: {
+            $dateToString: {
+              format: '%Y-%m-%d',
+              date: '$date',
+            },
+          },
           lab: 1,
           course: 1,
           professor: 1,
