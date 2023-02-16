@@ -31,7 +31,7 @@ export class UsersController {
     const { password } = updateUserDto;
     if (password) {
       const plainToHash = await hash(password, 10);
-      updateUserDto =  {...updateUserDto, password: plainToHash};
+      updateUserDto = { ...updateUserDto, password: plainToHash };
     }
     return this.usersService.update(id, updateUserDto);
   }
