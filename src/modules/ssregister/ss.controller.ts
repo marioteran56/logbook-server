@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseGuards } from '@nestjs/common';
-import { ssRegisterService } from './ss-register.service';
+import { ssRegisterService } from './ss.service';
 import { CreateEntryDto } from './dto/create-entry.dto';
 import { UpdateEntryDto } from './dto/update-entry.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';

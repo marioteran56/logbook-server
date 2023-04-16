@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { ssRegisterService } from './ss-register.service';
-import { ssRegisterController } from './ss-register.controller';
+import { ssRegisterService } from './ss.service';
+import { ssRegisterController } from './ss.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { EntrySchema } from './schemas/entry.schema';
 import { StudentSchema } from '../students/schemas/student.schema';
