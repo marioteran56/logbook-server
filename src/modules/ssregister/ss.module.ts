@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { ssRegisterService } from './ss.service';
-import { ssRegisterController } from './ss.controller';
+import { ssService } from './ss.service';
+import { ssController } from './ss.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { EntrySchema } from './schemas/entry.schema';
 import { StudentSchema } from '../students/schemas/student.schema';
@@ -18,7 +18,7 @@ import { CourseSchema } from '../courses/schemas/course.schema';
       { name: 'Course', schema: CourseSchema }
     ])
   ],
-  controllers: [ssRegisterController],
-  providers: [ssRegisterService],
+  controllers: [ssController],
+  providers: [ssService],
 })
 export class ssRegisterModule {}

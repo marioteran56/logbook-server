@@ -1,13 +1,14 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseGuards } from '@nestjs/common';
-import { ssRegisterService } from './ss.service';
+import { ssService } from './ss.service';
 import { CreateEntryDto } from './dto/create-entry.dto';
 import { UpdateEntryDto } from './dto/update-entry.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @UseGuards(JwtAuthGuard)
-@Controller('ssregister')
-export class ssRegisterController {
-  constructor(private readonly entriesService: ssRegisterService) {}
+// Nombre de la ruta API
+@Controller('ss')
+export class ssController {
+  constructor(private readonly entriesService: ssService) {}
 
   @Post()
   create(@Body() createEntryDto: any) {

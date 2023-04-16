@@ -8,7 +8,10 @@ export type EntryDocument = HydratedDocument<Entry>;
 @Schema()
 export class Entry {
   @Prop({ required: true })
-  date: Date;
+  start_time: Date;
+
+  @Prop({ required: true })
+  end_time: Date;
 
   @Prop({ required: true })
   course: Course;

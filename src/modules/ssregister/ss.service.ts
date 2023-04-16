@@ -8,7 +8,7 @@ import { UpdateEntryDto } from './dto/update-entry.dto';
 import { Entry } from './interfaces/entry.interface';
 
 @Injectable()
-export class ssRegisterService {
+export class ssService {
   constructor(
     @InjectModel('Entry')
     private readonly entryModel: Model<Entry>,
