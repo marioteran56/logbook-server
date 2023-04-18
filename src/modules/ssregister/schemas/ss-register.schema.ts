@@ -13,9 +13,6 @@ export class SsRegister {
   @Prop({ required: false })
   end_time: Date;
 
-  @Prop({ required: true })
-  course: Course;
-
   @Prop({ required: true, type: mongoose.Schema.Types.Number, ref: 'Student' })
   student: Student;
 
@@ -24,9 +21,6 @@ export class SsRegister {
 
   @Prop({ required: true })
   hours: number;
-
-  @Prop({ required: true })
-  checked: boolean;
 }
 
 export const SsRegisterSchema = SchemaFactory.createForClass(SsRegister);
