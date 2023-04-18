@@ -24,13 +24,11 @@ export class SsService {
       .exec()
       .then(async (res) => {
         if (res) {
-          console.log("PITO")
           return (await entry.save()).populate('student');
         }
         throw new BadRequestException('Student not registered');
       })
       .catch((err) => {
-        console.log("CHINGADAMADRE")
         return err;
       });
   }

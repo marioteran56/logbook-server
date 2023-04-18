@@ -12,7 +12,6 @@ export class SsController {
 
   @Post()
   create(@Body() createEntryDto: any) {
-    console.log(createEntryDto)
     return this.entriesService.create(createEntryDto);
   }
 
@@ -37,7 +36,8 @@ export class SsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEntryDto: UpdateEntryDto) {
+  update(@Param('id') id: string, @Body() updateEntryDto: any) {
+    console.log(updateEntryDto)
     return this.entriesService.update(id, updateEntryDto);
   }
 
