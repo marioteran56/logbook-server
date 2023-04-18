@@ -3,42 +3,45 @@ import { InjectModel } from '@nestjs/mongoose';
 import mongoose, { Model } from 'mongoose';
 import { async, EMPTY } from 'rxjs';
 import { Student } from '../students/interfaces/student.interface';
-import { CreateEntryDto } from './dto/create-entry.dto';
+import { CreateSsRegisterDto } from './dto/create-ss-register.dto';
 import { UpdateEntryDto } from './dto/update-entry.dto';
-import { Entry } from './interfaces/entry.interface';
+import { SsRegister } from './interfaces/ss-register.interface';
 
 @Injectable()
-export class ssService {
+export class SsService {
   constructor(
-    @InjectModel('Entry')
-    private readonly entryModel: Model<Entry>,
+    @InjectModel('SsRegister')
+    private readonly ssModel: Model<SsRegister>,
     @InjectModel('Student')
     private readonly studentModel: Model<Student>,
   ) {}
 
-  async create(createEntryDto: CreateEntryDto): Promise<Entry> {
-    const entry = new this.entryModel(createEntryDto);
+  async create(createSsRegisterDto: CreateSsRegisterDto): Promise<SsRegister> {
+    const entry = new this.ssModel(createSsRegisterDto);
+
     return await this.studentModel
       .findById(entry.student)
       .exec()
       .then(async (res) => {
         if (res) {
+          console.log("PITO")
           return (await entry.save()).populate('student');
         }
         throw new BadRequestException('Student not registered');
       })
       .catch((err) => {
+        console.log("CHINGADAMADRE")
         return err;
       });
   }
 
-  async findAll(): Promise<Entry[]> {
-    const entries = await this.entryModel.find();
+  async findAll(): Promise<SsRegister[]> {
+    const entries = await this.ssModel.find();
     return entries;
   }
 
-  async findOne(id: string): Promise<Entry> {
-    const entry = await this.entryModel.findById(id);
+  async findOne(id: string): Promise<SsRegister> {
+    const entry = await this.ssModel.findById(id);
     return entry;
   }
 
@@ -53,7 +56,7 @@ export class ssService {
     if (!reportData.courseCode || reportData.courseCode == 'undefined') reportData.courseCode = { $exists: true };
     if (!reportData.courseGroup || reportData.courseGroup == 'undefined') reportData.courseGroup = { $exists: true };
 
-    const report = await this.entryModel.aggregate([
+    const report = await this.ssModel.aggregate([
       {
         $match: {
           $and: [
@@ -115,7 +118,7 @@ export class ssService {
     if (!reportData.courseCode || reportData.courseCode == 'undefined') reportData.courseCode = { $exists: true };
     if (!reportData.courseGroup || reportData.courseGroup == 'undefined') reportData.courseGroup = { $exists: true };
 
-    const report = await this.entryModel.aggregate([
+    const report = await this.ssModel.aggregate([
       {
         $match: {
           $and: [
@@ -194,13 +197,13 @@ export class ssService {
     return report;
   }
 
-  async update(id: string, updateEntryDto: UpdateEntryDto): Promise<Entry> {
-    const entry = await this.entryModel.findByIdAndUpdate(id, updateEntryDto, { new: true })
+  async update(id: string, updateEntryDto: UpdateEntryDto): Promise<SsRegister> {
+    const entry = await this.ssModel.findByIdAndUpdate(id, updateEntryDto, { new: true })
     return entry;
   }
 
-  async remove(id: string): Promise<Entry> {
-    const entry = await this.entryModel.findByIdAndDelete(id);
+  async remove(id: string): Promise<SsRegister> {
+    const entry = await this.ssModel.findByIdAndDelete(id);
     return entry;
   }
 }

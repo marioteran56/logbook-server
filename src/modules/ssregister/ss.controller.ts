@@ -1,17 +1,18 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseGuards } from '@nestjs/common';
-import { ssService } from './ss.service';
-import { CreateEntryDto } from './dto/create-entry.dto';
+import { SsService } from './ss.service';
+import { CreateSsRegisterDto } from './dto/create-ss-register.dto';
 import { UpdateEntryDto } from './dto/update-entry.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @UseGuards(JwtAuthGuard)
 // Nombre de la ruta API
 @Controller('ss')
-export class ssController {
-  constructor(private readonly entriesService: ssService) {}
+export class SsController {
+  constructor(private readonly entriesService: SsService) {}
 
   @Post()
   create(@Body() createEntryDto: any) {
+    console.log(createEntryDto)
     return this.entriesService.create(createEntryDto);
   }
 

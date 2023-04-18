@@ -3,14 +3,14 @@ import mongoose, { HydratedDocument } from 'mongoose';
 import { Student } from 'src/modules/students/schemas/student.schema';
 import { Course } from './course.schema';
 
-export type EntryDocument = HydratedDocument<Entry>;
+export type SsRegisterDocument = HydratedDocument<SsRegister>;
 
 @Schema()
-export class Entry {
+export class SsRegister {
   @Prop({ required: true })
   start_time: Date;
 
-  @Prop({ required: true })
+  @Prop({ required: false })
   end_time: Date;
 
   @Prop({ required: true })
@@ -21,6 +21,12 @@ export class Entry {
 
   @Prop({ required: true })
   lab: string;
+
+  @Prop({ required: true })
+  hours: number;
+
+  @Prop({ required: true })
+  checked: boolean;
 }
 
-export const EntrySchema = SchemaFactory.createForClass(Entry);
+export const SsRegisterSchema = SchemaFactory.createForClass(SsRegister);

@@ -1,15 +1,15 @@
 import { Module } from '@nestjs/common';
-import { ssService } from './ss.service';
-import { ssController } from './ss.controller';
+import { SsService } from './ss.service';
+import { SsController } from './ss.controller';
 import { MongooseModule } from '@nestjs/mongoose';
-import { EntrySchema } from './schemas/entry.schema';
+import { SsRegisterSchema } from './schemas/ss-register.schema';
 import { StudentSchema } from '../students/schemas/student.schema';
 import { CourseSchema } from '../courses/schemas/course.schema';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
-      { name: 'Entry', schema: EntrySchema }
+      { name: 'SsRegister', schema: SsRegisterSchema }
     ]),
     MongooseModule.forFeature([
       { name: 'Student', schema: StudentSchema }
@@ -18,7 +18,7 @@ import { CourseSchema } from '../courses/schemas/course.schema';
       { name: 'Course', schema: CourseSchema }
     ])
   ],
-  controllers: [ssController],
-  providers: [ssService],
+  controllers: [SsController],
+  providers: [SsService],
 })
 export class ssRegisterModule {}
