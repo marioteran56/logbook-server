@@ -43,7 +43,7 @@ export class SsService {
     return entry;
   }
 
-  async generateStudentReport(reportData: any): Promise<any> {
+  async generateSSReport(reportData: any): Promise<any> {
     // Revisamos que campos fueron ingresados en blanco
     if (!reportData.lab || reportData.lab == 'undefined') reportData.lab = { $exists: true };
     if (!reportData.student || reportData.student == 'undefined') {
@@ -51,8 +51,8 @@ export class SsService {
     } else {
       reportData.student = Number(reportData.student);
     }
-    if (!reportData.courseCode || reportData.courseCode == 'undefined') reportData.courseCode = { $exists: true };
-    if (!reportData.courseGroup || reportData.courseGroup == 'undefined') reportData.courseGroup = { $exists: true };
+
+    console.log(reportData);
 
     const report = await this.ssModel.aggregate([
       {
@@ -65,13 +65,7 @@ export class SsService {
               student: reportData.student,
             },
             {
-              'course.code': reportData.courseCode,
-            },
-            {
-              'course.group': reportData.courseGroup,
-            },
-            {
-              date: {
+              start_time: {
                 $gte: new Date(reportData.startDate),
                 $lte: new Date(reportData.endDate),
               },
@@ -95,103 +89,16 @@ export class SsService {
       {
         $project: {
           _id: 0,
-          date: 1,
-          lab: 1,
-          course: 1,
+          start_time: 1,
           student: 1,
-        },
-      },
-    ]);
-    return report;
-  }
-
-  async generateProfessorReport(reportData: any): Promise<any> {
-    // Revisamos que campos fueron ingresados en blanco
-    if (!reportData.lab || reportData.lab == 'undefined') reportData.lab = { $exists: true };
-    if (!reportData.professor || reportData.professor == 'undefined') {
-      reportData.professor = { $exists: true };
-    } else {
-      reportData.professor = Number(reportData.professor);
-    }
-    if (!reportData.courseCode || reportData.courseCode == 'undefined') reportData.courseCode = { $exists: true };
-    if (!reportData.courseGroup || reportData.courseGroup == 'undefined') reportData.courseGroup = { $exists: true };
-
-    const report = await this.ssModel.aggregate([
-      {
-        $match: {
-          $and: [
-            {
-              lab: reportData.lab,
-            },
-            {
-              'course.code': reportData.courseCode,
-            },
-            {
-              'course.group': reportData.courseGroup,
-            },
-            {
-              date: {
-                $gte: new Date(reportData.startDate),
-                $lte: new Date(reportData.endDate),
-              },
-            },
-          ],
-        },
-      },
-      {
-        $lookup: {
-          from: 'professors',
-          localField: 'course.professor',
-          foreignField: '_id',
-          as: 'professor',
-        },
-      },
-      {
-        $unwind: {
-          path: '$professor',
-        },
-      },
-      {
-        $match: {
-          'professor._id': reportData.professor,
-        },
-      },
-      {
-        $project: {
-          _id: 0,
-          date: {
-            $dateToString: {
-              format: '%Y-%m-%d',
-              date: '$date',
-            },
-          },
           lab: 1,
+          hours: 1,
           course: 1,
-          professor: 1,
-        },
-      },
-      {
-        $group: {
-          _id: {
-            date: '$date',
-            professor: '$professor',
-            course: '$course',
-          },
-          date: {
-            $first: '$date',
-          },
-          lab: {
-            $first: '$lab',
-          },
-          course: {
-            $first: '$course',
-          },
-          professor: {
-            $first: '$professor',
-          },
+          end_time: 1,
         },
       },
     ]);
+    console.log(report);
     return report;
   }
 

@@ -43,7 +43,6 @@ export class EntriesService {
   }
 
   async generateStudentReport(reportData: any): Promise<any> {
-    // Revisamos que campos fueron ingresados en blanco
     if (!reportData.lab || reportData.lab == 'undefined') reportData.lab = { $exists: true };
     if (!reportData.student || reportData.student == 'undefined') {
       reportData.student = { $exists: true };
@@ -101,6 +100,7 @@ export class EntriesService {
         },
       },
     ]);
+    // console.log(report);
     return report;
   }
 

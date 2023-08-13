@@ -20,19 +20,15 @@ export class SsController {
     return this.entriesService.findAll();
   }
 
+  @Get('/reports')
+  generateSSReport(@Query() reportData: any) {
+    // console.log(reportData)
+    return this.entriesService.generateSSReport(reportData);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.entriesService.findOne(id);
-  }
-
-  @Get('/students/reports')
-  generateStudentReport(@Query() reportData: any) {
-    return this.entriesService.generateStudentReport(reportData);
-  }
-
-  @Get('/professors/reports')
-  generateProfessorReport(@Query() reportData: any) {
-    return this.entriesService.generateProfessorReport(reportData);
   }
 
   @Patch(':id')
