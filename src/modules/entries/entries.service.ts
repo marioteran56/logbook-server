@@ -100,7 +100,6 @@ export class EntriesService {
         },
       },
     ]);
-    // console.log(report);
     return report;
   }
 

@@ -22,7 +22,6 @@ export class SsController {
 
   @Get('/reports')
   generateSSReport(@Query() reportData: any) {
-    // console.log(reportData)
     return this.entriesService.generateSSReport(reportData);
   }
 
@@ -33,7 +32,6 @@ export class SsController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateEntryDto: any) {
-    console.log(updateEntryDto)
     return this.entriesService.update(id, updateEntryDto);
   }
 

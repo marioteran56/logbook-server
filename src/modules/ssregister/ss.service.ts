@@ -52,8 +52,6 @@ export class SsService {
       reportData.student = Number(reportData.student);
     }
 
-    console.log(reportData);
-
     const report = await this.ssModel.aggregate([
       {
         $match: {
@@ -88,7 +86,7 @@ export class SsService {
       },
       {
         $project: {
-          _id: 0,
+          _id: 1,
           start_time: 1,
           student: 1,
           lab: 1,
@@ -98,7 +96,6 @@ export class SsService {
         },
       },
     ]);
-    console.log(report);
     return report;
   }
 
