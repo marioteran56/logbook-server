@@ -103,6 +103,7 @@ export class CoursesService {
         $project: {
           _id: 1,
           name: 1,
+          group: 1,
           professor: 1,
         },
       },
