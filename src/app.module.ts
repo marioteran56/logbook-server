@@ -10,6 +10,7 @@ import { CoursesModule } from './modules/courses/courses.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { ssRegisterModule } from './modules/ssregister/ss.module';
+import { FacultyModule } from './modules/faculties/faculties.module';
 
 @Module({
   imports: [
@@ -21,7 +22,8 @@ import { ssRegisterModule } from './modules/ssregister/ss.module';
     EntriesModule,
     CoursesModule,
     AuthModule,
-    ssRegisterModule
+    ssRegisterModule,
+    FacultyModule
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { Course } from "../interfaces/course.interface";
 
 export class CreateSsRegisterDto {
     readonly start_time: Date;
@@ -7,4 +6,5 @@ export class CreateSsRegisterDto {
     readonly student:  mongoose.Schema.Types.Number;
     readonly lab:  string;
     readonly hours:  number;
+    readonly faculty: mongoose.Schema.Types.String;
 }

@@ -7,4 +7,5 @@ export interface SsRegister extends Document {
     readonly student:  mongoose.Schema.Types.Number;
     readonly lab:  string;
     readonly hours:  number;
+    readonly faculty: mongoose.Schema.Types.String;
 }

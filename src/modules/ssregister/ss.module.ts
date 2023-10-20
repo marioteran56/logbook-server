@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { SsRegisterSchema } from './schemas/ss-register.schema';
 import { StudentSchema } from '../students/schemas/student.schema';
 import { CourseSchema } from '../courses/schemas/course.schema';
+import { FacultySchema } from '../faculties/schemas/faculty.schema';
 
 @Module({
   imports: [
@@ -16,7 +17,7 @@ import { CourseSchema } from '../courses/schemas/course.schema';
     ]),
     MongooseModule.forFeature([
       { name: 'Course', schema: CourseSchema }
-    ])
+    ]),
   ],
   controllers: [SsController],
   providers: [SsService],

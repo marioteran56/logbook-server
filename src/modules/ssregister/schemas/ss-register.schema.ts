@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
 import { Student } from 'src/modules/students/schemas/student.schema';
-import { Course } from './course.schema';
+import { Faculty } from 'src/modules/faculties/schemas/faculty.schema'
 
 export type SsRegisterDocument = HydratedDocument<SsRegister>;
 
@@ -21,6 +21,9 @@ export class SsRegister {
 
   @Prop({ required: true })
   hours: number;
+
+  @Prop({ required: true, type: mongoose.Schema.Types.String, ref: 'Faculty'})
+  faculty: Faculty;
 }
 
 export const SsRegisterSchema = SchemaFactory.createForClass(SsRegister);

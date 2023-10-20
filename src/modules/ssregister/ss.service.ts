@@ -6,6 +6,7 @@ import { Student } from '../students/interfaces/student.interface';
 import { CreateSsRegisterDto } from './dto/create-ss-register.dto';
 import { UpdateEntryDto } from './dto/update-entry.dto';
 import { SsRegister } from './interfaces/ss-register.interface';
+import { Faculty } from '../faculties/interfaces/faculty.interface';
 
 @Injectable()
 export class SsService {
@@ -91,6 +92,7 @@ export class SsService {
           student: 1,
           lab: 1,
           hours: 1,
+          faculty: 1,
           course: 1,
           end_time: 1,
         },
