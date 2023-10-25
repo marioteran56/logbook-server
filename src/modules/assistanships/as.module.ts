@@ -22,4 +22,4 @@ import { FacultySchema } from '../faculties/schemas/faculty.schema';
   controllers: [SsController],
   providers: [AsService],
 })
-export class ssRegisterModule {}
+export class asRegisterModule {}

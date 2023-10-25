@@ -11,6 +11,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { ssRegisterModule } from './modules/ssregister/ss.module';
 import { FacultyModule } from './modules/faculties/faculties.module';
+import { asRegisterModule } from './modules/assistanships/as.module';
 
 @Module({
   imports: [
@@ -23,7 +24,8 @@ import { FacultyModule } from './modules/faculties/faculties.module';
     CoursesModule,
     AuthModule,
     ssRegisterModule,
-    FacultyModule
+    FacultyModule,
+    asRegisterModule
   ],
   controllers: [AppController],
   providers: [AppService],
