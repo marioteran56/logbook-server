@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import mongoose, { Document } from "mongoose";
 
-export class CreateSsRegisterDto {
+export interface AsRegister extends Document {
     readonly start_time: Date;
     readonly end_time: Date;
     readonly student:  mongoose.Schema.Types.Number;

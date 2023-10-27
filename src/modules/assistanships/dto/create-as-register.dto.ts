@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-export class CreateSsRegisterDto {
+export class CreateAsRegisterDto {
     readonly start_time: Date;
     readonly end_time: Date;
     readonly student:  mongoose.Schema.Types.Number;

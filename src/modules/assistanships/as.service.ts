@@ -3,22 +3,22 @@ import { InjectModel } from '@nestjs/mongoose';
 import mongoose, { Model } from 'mongoose';
 import { async, EMPTY } from 'rxjs';
 import { Student } from '../students/interfaces/student.interface';
-import { CreateSsRegisterDto } from './dto/create-ss-register.dto';
+import { CreateAsRegisterDto } from './dto/create-as-register.dto';
 import { UpdateEntryDto } from './dto/update-entry.dto';
-import { SsRegister } from './interfaces/ss-register.interface';
+import { AsRegister } from './interfaces/as-register.interface';
 import { Faculty } from '../faculties/interfaces/faculty.interface';
 
 @Injectable()
-export class SsService {
+export class AsService {
   constructor(
-    @InjectModel('SsRegister')
-    private readonly ssModel: Model<SsRegister>,
+    @InjectModel('AsRegister')
+    private readonly asModel: Model<AsRegister>,
     @InjectModel('Student')
     private readonly studentModel: Model<Student>,
   ) {}
 
-  async create(createSsRegisterDto: CreateSsRegisterDto): Promise<SsRegister> {
-    const entry = new this.ssModel(createSsRegisterDto);
+  async create(createSsRegisterDto: CreateAsRegisterDto): Promise<AsRegister> {
+    const entry = new this.asModel(createSsRegisterDto);
 
     return await this.studentModel
       .findById(entry.student)
@@ -34,17 +34,17 @@ export class SsService {
       });
   }
 
-  async findAll(): Promise<SsRegister[]> {
-    const entries = await this.ssModel.find();
+  async findAll(): Promise<AsRegister[]> {
+    const entries = await this.asModel.find();
     return entries;
   }
 
-  async findOne(id: string): Promise<SsRegister> {
-    const entry = await this.ssModel.findById(id);
+  async findOne(id: string): Promise<AsRegister> {
+    const entry = await this.asModel.findById(id);
     return entry;
   }
 
-  async generateSSReport(reportData: any): Promise<any> {
+  async generateASReport(reportData: any): Promise<any> {
     // Revisamos que campos fueron ingresados en blanco
     if (!reportData.lab || reportData.lab == 'undefined') reportData.lab = { $exists: true };
     if (!reportData.student || reportData.student == 'undefined') {
@@ -53,7 +53,7 @@ export class SsService {
       reportData.student = Number(reportData.student);
     }
 
-    const report = await this.ssModel.aggregate([
+    const report = await this.asModel.aggregate([
       {
         $match: {
           $and: [
@@ -101,13 +101,13 @@ export class SsService {
     return report;
   }
 
-  async update(id: string, updateEntryDto: UpdateEntryDto): Promise<SsRegister> {
-    const entry = await this.ssModel.findByIdAndUpdate(id, updateEntryDto, { new: true })
+  async update(id: string, updateEntryDto: UpdateEntryDto): Promise<AsRegister> {
+    const entry = await this.asModel.findByIdAndUpdate(id, updateEntryDto, { new: true })
     return entry;
   }
 
-  async remove(id: string): Promise<SsRegister> {
-    const entry = await this.ssModel.findByIdAndDelete(id);
+  async remove(id: string): Promise<AsRegister> {
+    const entry = await this.asModel.findByIdAndDelete(id);
     return entry;
   }
 }

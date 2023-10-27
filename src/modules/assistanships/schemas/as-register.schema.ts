@@ -3,10 +3,10 @@ import mongoose, { HydratedDocument } from 'mongoose';
 import { Student } from 'src/modules/students/schemas/student.schema';
 import { Faculty } from 'src/modules/faculties/schemas/faculty.schema'
 
-export type SsRegisterDocument = HydratedDocument<SsRegister>;
+export type AsRegisterDocument = HydratedDocument<AsRegister>;
 
 @Schema()
-export class SsRegister {
+export class AsRegister {
   @Prop({ required: true })
   start_time: Date;
 
@@ -26,4 +26,4 @@ export class SsRegister {
   faculty: Faculty;
 }
 
-export const SsRegisterSchema = SchemaFactory.createForClass(SsRegister);
+export const AsRegisterSchema = SchemaFactory.createForClass(AsRegister);
