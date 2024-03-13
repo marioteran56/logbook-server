@@ -12,6 +12,9 @@ import { ConfigModule } from '@nestjs/config';
 import { ssRegisterModule } from './modules/ssregister/ss.module';
 import { FacultyModule } from './modules/faculties/faculties.module';
 import { asRegisterModule } from './modules/assistanships/as.module';
+import { TypeormService } from './inventory/services/typeorm/typeorm.service';
+import { ItemsService } from './inventory/services/items/items.service';
+import { ItemController } from './inventory/controller/item/item.controller';
 
 @Module({
   imports: [
@@ -27,7 +30,7 @@ import { asRegisterModule } from './modules/assistanships/as.module';
     FacultyModule,
     asRegisterModule
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, ItemController],
+  providers: [AppService, TypeormService, ItemsService],
 })
 export class AppModule {}
