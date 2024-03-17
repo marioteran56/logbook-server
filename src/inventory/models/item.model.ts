@@ -1,7 +1,8 @@
-import { Entity } from "typeorm";
+import { Entity, PrimaryColumn } from "typeorm";
 
 @Entity()
-export class item{
+export class Items{
+    @PrimaryColumn()
     id: number;
     PERTENECE: string;
     FONDO: string; 
@@ -18,4 +19,5 @@ export class item{
     RESPONSABLE: string;
     No_EMP: number
     OBSERVACIONES: string;
+    status: boolean;
 }

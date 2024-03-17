@@ -15,6 +15,8 @@ import { asRegisterModule } from './modules/assistanships/as.module';
 import { TypeormService } from './inventory/services/typeorm/typeorm.service';
 import { ItemsService } from './inventory/services/items/items.service';
 import { ItemController } from './inventory/controller/item/item.controller';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Items } from './inventory/models/item.model';
 
 @Module({
   imports: [
@@ -28,7 +30,9 @@ import { ItemController } from './inventory/controller/item/item.controller';
     AuthModule,
     ssRegisterModule,
     FacultyModule,
-    asRegisterModule
+    asRegisterModule,
+    TypeOrmModule.forRootAsync({useClass: TypeormService}),
+    TypeOrmModule.forFeature([Items])
   ],
   controllers: [AppController, ItemController],
   providers: [AppService, TypeormService, ItemsService],
